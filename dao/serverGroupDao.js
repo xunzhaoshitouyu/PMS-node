@@ -1,7 +1,7 @@
-const SqlCommand = require("../modules/sqlCommand");
+const SqlCommand = require('../modules/sqlCommand');
 
-const Util = require("../utils/utils");
-const ServerGroup = require("../modules/models/ServerGroup");
+const Util = require('../utils/utils');
+const ServerGroup = require('../modules/models/server/ServerGroup');
 
 /**
  * @description 查询所有服务器分组，sequelize
@@ -14,12 +14,15 @@ async function queryAllGroups(req, res) {
   try {
     let data = await ServerGroup.findAll({
       attributes: [
-        "id",
-        "serverGroupName",
-        "serverGroupDescription",
-        "isDeleted",
-        "createTime"
-      ]
+        'id',
+        'serverGroupName',
+        'serverGroupDescription',
+        'isDeleted',
+        'createTime',
+      ],
+      where: {
+        isDeleted: 0,
+      },
     });
     result = Util.responseHandler(data);
   } catch (error) {
@@ -64,14 +67,14 @@ async function addGroup(req, res) {
       serverGroupDescription = req.body.serverGroupDescription;
       isDeleted = req.body.isDeleted;
     } else {
-      throw new Error("serverGroupName不能为空");
+      throw new Error('serverGroupName不能为空');
     }
     let data = await ServerGroup.create({
       serverGroupName: serverGroupName,
       serverGroupDescription: serverGroupDescription,
-      isDeleted: isDeleted
+      isDeleted: isDeleted,
     });
-    result = Util.responseHandler("新增分组成功");
+    result = Util.responseHandler('新增分组成功');
   } catch (error) {
     result = Util.errorHandler(error);
   }
@@ -79,7 +82,46 @@ async function addGroup(req, res) {
   res.json(result);
 }
 
+/**
+ * @description 删除分组
+ * @author cc
+ * @param {*} req 请求体
+ * @param {*} res 响应体
+ */
+async function deleteGroup(req, res) {
+  let result = {};
+  let id;
+  try {
+    id = req.query.id;
+    if (id) {
+      result = Util.responseHandler(id);
+      let state = await ServerGroup.update(
+        { isDeleted: 1 },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      if (state[0]) {
+        result = Util.responseHandler('删除成功');
+      } else {
+        result = Util.errorHandler(
+          '删除失败，请确认要删除的分组ID是否正确！',
+          400
+        );
+      }
+    } else {
+      result = Util.errorHandler('id不能为空！', 400);
+    }
+  } catch (error) {
+    result = Util.errorHandler(error);
+  }
+  res.json(result);
+}
+
 module.exports = {
   queryAllGroups: queryAllGroups,
-  addGroup
+  addGroup,
+  deleteGroup,
 };

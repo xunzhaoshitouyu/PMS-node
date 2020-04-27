@@ -10,8 +10,8 @@ class Util {
   static responseHandler(data = []) {
     const result = {
       code: 200,
-      msg: "success",
-      data: data
+      msg: 'success',
+      data: data,
     };
     return result;
   }
@@ -24,11 +24,11 @@ class Util {
    * @returns
    * @memberof Util
    */
-  static errorHandler(err) {
+  static errorHandler(err, code = 500) {
     const result = {
-      code: 500,
-      msg: "error:" + err,
-      data: null
+      code: code,
+      msg: 'error:' + err,
+      data: null,
     };
     return result;
   }

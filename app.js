@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 // 自定义路由
 const serverGroupController = require('./routes/serverGroupController');
 const serverController = require('./routes/serverController');
+const recordController = require('./routes/recordController');
 
 var app = express();
 
@@ -26,14 +27,15 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/server_group', serverGroupController);
 app.use('/server', serverController);
+app.use('/record', recordController);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

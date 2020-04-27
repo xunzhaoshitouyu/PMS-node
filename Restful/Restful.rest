@@ -1,0 +1,39 @@
+### 查询全部服务分组数据
+GET http://localhost:9001/server_group/getSGList HTTP/1.1
+
+
+### 删除分组
+GET http://localhost:9001/server_group/delete?id=1 HTTP/1.1
+
+
+### 根据条件获取服务器信息
+POST http://localhost:9001/server/getServersByQuery HTTP/1.1
+content-type: application/json
+Connection: "keep-alive"
+
+{
+    "serverGroupId": null,
+    "serverName": null,
+    "ipAddress":null
+}
+
+### 新增服务器
+POST http://localhost:9001/server/insert HTTP/1.1
+content-type: application/json
+
+{"serverName":"2020042703","serverGroupId":"67ffae27-9fe2-4d5d-a97a-5b2548c0093a","locationId":"1","ipAddress":"10","os":"windows"}
+
+### 更新服务器
+POST http://localhost:9001/server/update HTTP/1.1
+content-type: application/json
+
+{"id":"05c24a76-105c-4da8-bb32-ffbaa6687359","isDeleted":0}
+
+### 删除服务器
+POST http://localhost:9001/server/delete HTTP/1.1
+content-type: application/json
+
+{"id":"05c24a76-105c-4da8-bb32-ffbaa6687359"}
+
+### 根据id查询服务器详情
+GET http://localhost:9001/record/getLatestResourcesById?id=3d1609f2-27e0-43d1-a855-58c2239da998 HTTP/1.1 

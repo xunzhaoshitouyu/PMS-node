@@ -1,8 +1,8 @@
 // sequelize构造函数传递的配置项
 mysql = {
-  host: '172.30.1.19',
-  user: 'Samuel',
-  password: '1qaz@WSX',
+  host: 'localhost',
+  user: 'root',
+  password: '123456',
   port: '3306',
   database: 'monitor',
   charset: 'UTF8_GENERAL_CI', // 连接字符集

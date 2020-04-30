@@ -37,3 +37,16 @@ content-type: application/json
 
 ### 根据id查询服务器详情
 GET http://localhost:9001/record/getLatestResourcesById?id=3d1609f2-27e0-43d1-a855-58c2239da998 HTTP/1.1 
+
+### 获取位置信息
+GET http://localhost:9001/location/getLocationList HTTP/1.1
+
+### 查看日志信息
+POST http://localhost:9001/log/getPageByQuery HTTP/1.1
+content-Type: application/json
+
+{
+    "currentPageNum":3,
+    "rowOfPage":10,
+    "param":{"serverId":"88c8d01f-24c1-4a38-a07d-74d74ff3f592","intervalType":6}
+}

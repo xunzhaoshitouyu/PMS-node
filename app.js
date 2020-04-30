@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 const serverGroupController = require('./routes/serverGroupController');
 const serverController = require('./routes/serverController');
 const recordController = require('./routes/recordController');
+const locationController = require("./routes/locationController");
+const logController = require("./routes/logController");
 
 var app = express();
 
@@ -28,6 +30,8 @@ app.use('/users', usersRouter);
 app.use('/server_group', serverGroupController);
 app.use('/server', serverController);
 app.use('/record', recordController);
+app.use("/location",locationController);
+app.use("/log",logController);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

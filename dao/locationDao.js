@@ -2,8 +2,9 @@
  * @Author: cc 
  * @Date: 2020-04-29 13:18:32 
  * @Last Modified by: cc
- * @Last Modified time: 2020-04-30 13:21:11
+ * @Last Modified time: 2020-05-24 13:01:41
  */
+
 const Sequelize = require("sequelize");
 const Util = require("../utils/utils");
 const Location = require("../modules/models/location/Location");
